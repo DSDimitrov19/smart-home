@@ -19,7 +19,7 @@ const Hero = () => {
       <div className="absolute -z-10 size-full bg-gradient-to-t from-zinc-800" />
 
       <motion.div
-      className="flex max-w-7xl flex-col items-center space-y-10 text-center"
+      className="flex max-w-7xl flex-col items-center space-y-10 text-center px-5"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
