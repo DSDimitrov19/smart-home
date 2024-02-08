@@ -13,7 +13,7 @@ const buttonVariants = cva('justify-centers inline-flex items-center ', {
       default: 'h-9 px-4 py-2',
       sm: 'h-8 px-3 text-xs',
       md: 'h-8 px-4 text-sm',
-      lg: 'h-10 px-8',
+      lg: 'h-10 px-5 py-6 md:py-2 md:px-8',
       icon: 'size-8 items-center justify-center rounded-lg',
     },
     rounded: {
