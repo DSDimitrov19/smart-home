@@ -22,7 +22,7 @@ export const siteConfig: SiteConfig = {
 		{ label: "Content Creators", href: "/" },
 	],
 	buttonLinks: [
-		{ label: "Start now", href: "/" },
+		{ label: "Start now", href: "/dashboard" },
 		{
 			label: "Watch Preview",
 			href: "/",
