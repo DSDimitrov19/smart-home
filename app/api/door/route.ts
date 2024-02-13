@@ -6,8 +6,8 @@ interface Door {
 }
 
 export async function GET() {
-    await prisma.user.create({ data: { email: "dimi1004@gmail.com", password: "password123" } })
-    return NextResponse.json(await prisma.user.findMany());
+    // await prisma.user.create({ data: { email: "dimi1004@gmail.com", password: "password123" } })
+    return NextResponse.json(await prisma.door.findMany());
 }
 
 export async function POST(request: Request) {
