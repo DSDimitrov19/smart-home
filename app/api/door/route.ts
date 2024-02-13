@@ -2,6 +2,7 @@ import { prisma } from "@/db";
 import { NextResponse } from "next/server";
 
 interface Door {
+    id: string
     name: string
     status: string
 }
