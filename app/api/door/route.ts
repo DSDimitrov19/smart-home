@@ -18,3 +18,18 @@ export async function POST(request: Request) {
 
     return NextResponse.json(await prisma.door.findMany());
 }
+
+export async function PUT(request: Request) {
+    const data: Door = await request.json();
+
+    await prisma.door.update({
+        where: {
+            id: data.id,
+        },
+        data: {
+            status: data.status
+        },
+    })
+
+    return NextResponse.json(await prisma.door.findMany());
+}
