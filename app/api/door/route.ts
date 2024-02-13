@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 
 interface Door {
     name: string
+    status: string
 }
 
 export async function GET() {
@@ -13,7 +14,7 @@ export async function GET() {
 export async function POST(request: Request) {
     const data: Door = await request.json();
 
-    await prisma.door.create({ data: { name: data.name } })
+    await prisma.door.create({ data: { name: data.name, status: data.status } })
 
     return NextResponse.json(await prisma.door.findMany());
 }
