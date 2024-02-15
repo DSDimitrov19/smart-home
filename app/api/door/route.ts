@@ -32,7 +32,8 @@ export async function PUT(request: Request) {
             id: data.id,
         },
         data: {
-            status: data.status
+            status: data.status,
+            name: data.name
         },
     })
 
