@@ -38,7 +38,7 @@ export default function Home() {
 
   return (
     <>
-      <h1 className="text-center text-3xl font-bold my-4">{session.user?.email?.slice(0, 8)}'s Home</h1>
+      <h1 className="text-center text-3xl font-bold my-4">{session.user?.email?.slice(0, 8)}&apos;s Home</h1>
       <div className="flex justify-center items-center flex-row flex-wrap gap-4 p-4">
         {devices.map((device, index) => {
           return <Card key={index} device={device} fetchDevices={fetchDevices}/>
