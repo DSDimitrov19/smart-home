@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 interface Device {
-    id: string
-    name: string
-    status: string
+  id: string
+  ownerId: string
+  name: string
+  status: string
+  createdAt: Date
+  updatedAt: Date
 }
 
 
@@ -18,7 +21,7 @@ const Card = ({ device, fetchDevices }: { device: Device, fetchDevices: any }) =
         status = 'opened'
     }
 
-    const res = await fetch("/api/door", {
+    const res = await fetch("/api/device", {
         method: "PUT",
         body: JSON.stringify({
           id: device.id,
@@ -34,7 +37,7 @@ const Card = ({ device, fetchDevices }: { device: Device, fetchDevices: any }) =
   };
 
   return (
-    <div className="min-w-[20vw] mx-auto rounded-md overflow-hidden shadow-lg bg-zinc text-white">
+    <div className="min-w-[15vw] mx-auto rounded-md overflow-hidden shadow-lg bg-zinc text-white">
       <div className="bg-zinc-700 px-6 py-4 flex items-center justify-center flex-col gap-2 relative">
         <h2 className="font-bold text-2xl">{device.name}</h2>
         <motion.div

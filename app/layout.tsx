@@ -4,6 +4,7 @@ import "./globals.css";
 import { Provider } from "@/components/Provider";
 import Footer from "@/components/footer";
 import { cn } from "@/utils/cn";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(inter.className, 'select-none bg-zinc-800 text-white')}>
         <Provider>
+          <Toaster/>
           <main>{children}</main>
           {/* <Footer/> */}
         </Provider>

@@ -19,6 +19,9 @@ const handler = NextAuth({
                     email: credentials?.email,
                     password: credentials?.password,
                 },
+                include: {
+                  devices: true
+                }
             });
 
             if (!user) return null;

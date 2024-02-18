@@ -8,6 +8,7 @@ import Link from 'next/link'
 import Button from './button'
 import Logo from './logo'
 import { siteConfig } from '@/config/siteConfig'
+import { signOut } from 'next-auth/react'
 
 const Navbar = () => {
   const [mobileNav, setMobileNav] = useState(false)
@@ -18,7 +19,7 @@ const Navbar = () => {
   }, [isMobile])
 
   return (
-    <nav className="fixed z-50 h-20 w-full bg-zinc-900">
+    <nav className="z-50 h-20 w-full bg-zinc-900">
       <div className="container mx-auto flex h-full justify-between px-10">
         <div className="flex items-center space-x-10 ">
           <Link href="/">
@@ -38,7 +39,7 @@ const Navbar = () => {
 
         <div className="flex items-center space-x-5">
           <>
-            {isMobile && (
+            {isMobile ? (
               <button onClick={() => setMobileNav(!mobileNav)}>
                 {mobileNav ? (
                   <XMarkIcon className="h-6 w-6 text-gray-500" />
@@ -46,13 +47,17 @@ const Navbar = () => {
                   <Bars3Icon className="h-6 w-6 text-gray-500" />
                 )}
               </button>
+            ) : (
+              <Button onClick={() => signOut()} size="md" className="dark:bg-red-500 dark:text-white">
+                Logout
+              </Button>
             )}
           </>
         </div>
       </div>
 
       {mobileNav && (
-        <div className="absolute top-0 mt-20 flex w-full flex-col space-y-2 p-2 bg-zinc-900">
+        <div className="absolute top-0 mt-20 flex w-full flex-col space-y-2 p-2 bg-zinc-900 z-50">
           {siteConfig.navLinks.map((link, index) => (
             <Link key={index} href={link.href} target={link.target}>
               <Button size="md" className="w-full dark:bg-white/5 dark:text-white">
@@ -60,6 +65,10 @@ const Navbar = () => {
               </Button>
             </Link>
           ))}
+
+          <Button onClick={() => signOut()} size="md" className="w-full dark:bg-red-500 dark:text-white">
+            Logout
+          </Button>
         </div>
       )}
     </nav>

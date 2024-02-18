@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import Card from "@/components/card";
-import { signIn, signOut, useSession } from "next-auth/react";
+import Navbar from "@/components/navbar";
+import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -16,7 +18,7 @@ export default function Home() {
 
   const fetchDevices = async () => {
     try {
-      const response = await fetch('/api/door');
+      const response = await fetch(`/api/device?ownerId=${session?.user?.id}`);
       const newData = await response.json();
       setDevices(newData);
     } catch (error) {
@@ -30,7 +32,7 @@ export default function Home() {
     const interval = setInterval(fetchDevices, 1000);
 
     return () => clearInterval(interval);
-  }, [])
+  }, [status])
 
   if (status === "loading") {
     return <></>
@@ -38,8 +40,8 @@ export default function Home() {
 
   return (
     <>
-      <h1 className="text-center text-3xl font-bold my-4">{session.user?.email?.slice(0, 8)}&apos;s Home</h1>
-      <div className="flex justify-center items-center flex-row flex-wrap gap-4 p-4">
+      <Navbar />
+      <div className="flex justify-center items-center flex-row flex-wrap gap-4 py-10 px-4">
         {devices.map((device, index) => {
           return <Card key={index} device={device} fetchDevices={fetchDevices}/>
         })}

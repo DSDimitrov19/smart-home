@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate"
+    "postinstall": "npx prisma migrate dev --name update & prisma generate"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",
@@ -19,6 +19,7 @@
     "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
+    "sonner": "^1.4.0",
     "tailwind-merge": "^2.2.1",
     "usehooks-ts": "^2.13.0"
   },
