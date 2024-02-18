@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "npx prisma migrate dev --name update & prisma generate"
+    "postinstall": "prisma generate & prisma migrate dev --name update"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",
