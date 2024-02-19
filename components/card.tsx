@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import Modal from './edit-modal';
 
 interface Device {
   id: string
@@ -12,6 +13,12 @@ interface Device {
 
 
 const Card = ({ device, fetchDevices }: { device: Device, fetchDevices: any }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   const toggleCard = async () => {
     var status;
 
@@ -42,20 +49,31 @@ const Card = ({ device, fetchDevices }: { device: Device, fetchDevices: any }) =
         <h2 className="font-bold text-2xl">{device.name}</h2>
         <motion.div
           className={`w-6 h-6 rounded-full my-4 ${device.status == 'opened' ? 'bg-green-500' : 'bg-red-500'}`}
-          animate={{ opacity: [0, 1, 0], scale: [1, 1.5, 1] }}
+          animate={{ opacity: [0.5, 0.8, 0.5], scale: [1, 1.3, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
         />
-        <motion.button
-          className={`inline-block rounded-md px-4 py-2 text-lg font-semibold ${
-            device.status == 'opened' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
-          }`}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={toggleCard}
-        >
-          {device.status == 'opened' ? 'Opened' : 'Closed'}
-        </motion.button>
+        <div className='flex flex-row gap-2 items-center'>
+          <motion.button
+            className={`inline-block rounded-md px-4 py-2 text-lg font-semibold ${
+              device.status == 'opened' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+            }`}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={toggleCard}
+          >
+            {device.status == 'opened' ? 'Opened' : 'Closed'}
+          </motion.button>
+          <motion.button
+            className={`inline-block rounded-md px-4 py-2 text-lg font-semibold text-white bg-blue-500`}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={toggleModal}
+          >
+            Edit
+          </motion.button>
+        </div>
       </div>
+      {isModalOpen && <Modal isOpen={isModalOpen} setIsOpen={setIsModalOpen} device={device} fetchDevices={fetchDevices} />}
     </div>
   );
 };
