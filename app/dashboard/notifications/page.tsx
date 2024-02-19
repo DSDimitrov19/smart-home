@@ -80,6 +80,7 @@ export default function Home() {
         <div className="space-y-4 mx-auto w-1/2 p-4">
             {notifications.map((notification: Notification, index: number) => (
                 <motion.div
+                    key={index}
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 + index / 5, duration: 0.5 }}
