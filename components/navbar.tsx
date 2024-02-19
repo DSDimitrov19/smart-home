@@ -10,9 +10,28 @@ import Logo from './logo'
 import { siteConfig } from '@/config/siteConfig'
 import { signOut } from 'next-auth/react'
 
-const Navbar = () => {
+const Navbar = ({ userId }: { userId: string | undefined }) => {
   const [mobileNav, setMobileNav] = useState(false)
   const isMobile = useMediaQuery('(max-width: 768px)')
+  const [notificationsCount, setNotificationsCount] = useState(0);
+
+  const fetchNotifications = async () => {
+    try {
+      const response = await fetch(`/api/notification?receiverId=${userId}&count=true`);
+      const newData = await response.json();
+      setNotificationsCount(newData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchNotifications();
+
+    const interval = setInterval(fetchNotifications, 1000);
+
+    return () => clearInterval(interval);
+  }, [])
 
   useEffect(() => {
     if (!isMobile) setMobileNav(false)
@@ -29,8 +48,13 @@ const Navbar = () => {
           <div className="hidden space-x-5 md:block">
             {siteConfig.navLinks.map((link, index) => (
               <Link key={index} href={link.href} target={link.target}>
-                <Button variant="link" size="md">
+                <Button className='relative' variant="link" size="md">
                   {link.label}
+                  {notificationsCount > 0 && link.label === 'Notifications' && (
+                    <span className="absolute -top-1 -right-1 bg-green-500 rounded-full px-1.5 py-0.5 text-xs text-white">
+                      {notificationsCount}
+                    </span>
+                  )}
                 </Button>
               </Link>
             ))}
@@ -62,6 +86,11 @@ const Navbar = () => {
             <Link key={index} href={link.href} target={link.target}>
               <Button size="md" className="w-full dark:bg-white/5 dark:text-white">
                 {link.label}
+                {link.label === 'Notifications' && (
+                  <span className="ml-1 mb-2 bg-green-500 rounded-full px-1.5 py-0.5 text-xs text-white">
+                    {notificationsCount}
+                  </span>
+                )}
               </Button>
             </Link>
           ))}

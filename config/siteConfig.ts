@@ -17,8 +17,7 @@ export const siteConfig: SiteConfig = {
 	background: "background.jpeg",
 	navLinks: [
 		{ label: "Devices", href: "/dashboard" },
-		{ label: "Notifications", href: "/dashboard/notifications" },
-		{ label: "Statistics", href: "/dashboard/statistics" }
+		{ label: "Notifications", href: "/dashboard/notifications" }
 	],
 	buttonLinks: [
 		{ label: "Start now", href: "/dashboard" },

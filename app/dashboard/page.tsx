@@ -47,7 +47,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
+      <Navbar userId={session.user.id} />
       <div className="flex justify-center items-center flex-row flex-wrap gap-4 py-10 px-4">
         {devices.map((device, index) => {
           return <Card key={index} device={device} fetchDevices={fetchDevices}/>
