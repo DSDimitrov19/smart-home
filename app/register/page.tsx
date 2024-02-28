@@ -25,9 +25,21 @@ export default function Home() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  useEffect(() => {
+    if (password !== confirmPassword) {
+      setPasswordError("Passwords don't match");
+    } else {
+      setPasswordError('');
+    }
+  }, [confirmPassword])
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    if (passwordError) return null;
 
     const res = await fetch("/api/user", {
         method: "POST",
@@ -73,6 +85,8 @@ export default function Home() {
         className="-z-10 object-cover opacity-35"
       />
       <div className="absolute -z-10 size-full bg-gradient-to-t from-zinc-800" />
+
+      <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="/" className="absolute top-3 left-3 cursor-pointer">{"<--"} Go back</motion.a>
 
       <motion.form
         initial={{ opacity: 0, scale: 0.8 }}
@@ -153,6 +167,25 @@ export default function Home() {
             className="border border-gray-600 rounded-lg px-4 py-3 bg-zinc-800 text-white"
             required
           />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
+          className="flex flex-col space-y-2"
+        >
+          <label htmlFor="confirmPassword" className="font-semibold text-white">
+            Confirm password
+          </label>
+          <input
+            type="password"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className="border border-gray-600 rounded-lg px-4 py-3 bg-zinc-800 text-white"
+            required
+          />
+          {passwordError && <p className="text-red-500">{passwordError}</p>} 
         </motion.div>
         <motion.button
           type="submit"

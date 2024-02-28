@@ -57,6 +57,8 @@ export default function Home() {
       />
       <div className="absolute -z-10 size-full bg-gradient-to-t from-zinc-800" />
 
+      <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="/" className="absolute top-3 left-3 cursor-pointer">{"<--"} Go back</motion.a>
+
       <motion.form
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
